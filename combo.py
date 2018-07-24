@@ -50,7 +50,7 @@ def main():
             message = ircmsg.split('PRIVMSG', 1)[1].split(':',1)[1]
             if len(name) < 17:
                 global last_nick
-                if last_nick != name:
+                if last_nick != name and message.rstrip() != "!combo":
                     global combo
                     combo = 1
                     last_nick = name
@@ -58,11 +58,9 @@ def main():
                     if name == last_nick:
                         combo += 1
                        
-                if message.find("!combo"):
-                    send(name + " is on a " + str(combo) + "combo")
-                else:
-                    pass
-                    
+                if message.rstrip() == "!combo":
+                    send(last_nick + " is on a " + str(combo) + " message streak")
+               
             if name.lower() == admin.lower() and message.rstrip() == exit_code:
                 sock.send(bytes("QUIT \n", "UTF-8"))
                 return    
