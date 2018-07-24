@@ -10,6 +10,8 @@ logout = "bye " + nick
 password = "combo916"
 combo = 0
 last_nick = ""
+exit_code = "!cquit"
+
 def connect():
     sock.connect((server, 6667))
     sock.send(bytes("USER " + nick +" "+ nick + " " + nick + " " + nick + "\n", "UTF-8"))
@@ -55,8 +57,15 @@ def main():
                 else:
                     if name == last_nick:
                         combo += 1
-                        send(name + " is on a " + str(combo) + "combo")
-            
+                       
+                if message.find("!combo"):
+                    send(name + " is on a " + str(combo) + "combo")
+                else:
+                    pass
+                    
+            if name.lower() == admin.lower() and message.rstrip() == exit_code:
+                sock.send(bytes("QUIT \n", "UTF-8"))
+                return    
 
             
                     
