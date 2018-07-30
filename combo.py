@@ -3,7 +3,8 @@ import time
 
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 server = "chat.freenode.net"
-channel = "##idk"
+channel2 = "##idk"
+channel = "#r.trees"
 nick = "combo"
 admin = "Death916"
 logout = "bye " + nick
@@ -31,7 +32,7 @@ def join(chan):
 def ping():
     sock.send(bytes("PONG  :pingis\n", "UTF-8"))
 
-def send(msg, target=channel):
+def send(msg, target):
     sock.send(bytes("PRIVMSG " + target + "  :" + msg + "\n", "UTF-8"))
 
 #def combo():
@@ -40,6 +41,7 @@ def send(msg, target=channel):
 def main():
     connect()
     join(channel)
+    join(channel2)
     auth()
     while 1:
         ircmsg = sock.recv(3300).decode("UTF-8")
@@ -58,9 +60,12 @@ def main():
                     if name == last_nick:
                         combo += 1
                        
-                if message.rstrip() == "!combo":
-                    send(last_nick + " is on a " + str(combo) + " message streak")
-               
+                if message.rstrip() == "!combo":   
+                    if combo < 5:
+                        send(last_nick + " is on a " + str(combo) + " message streak", channel)
+                    elif combo >= 6:
+                        send(last_nick + " is on a " + str(combo) + " message streak. they're talkin to themselves", channel)
+                        
             if name.lower() == admin.lower() and message.rstrip() == exit_code:
                 sock.send(bytes("QUIT \n", "UTF-8"))
                 return    
