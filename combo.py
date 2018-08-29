@@ -8,10 +8,11 @@ channel = "#r.trees"
 nick = "combo"
 admin = "Death916"
 logout = "bye " + nick
-password = "combo916"
+password = input('input password\n')
 combo = 0
 last_nick = ""
 exit_code = "!cquit"
+start_time = 0
 
 def connect():
     sock.connect((server, 6667))
@@ -43,6 +44,7 @@ def main():
     join(channel)
     join(channel2)
     auth()
+    start_time = time.time()
     while 1:
         ircmsg = sock.recv(3300).decode("UTF-8")
         ircmsg = ircmsg.strip('\n\r')
@@ -70,9 +72,21 @@ def main():
                 sock.send(bytes("QUIT \n", "UTF-8"))
                 return    
 
-            
-                    
         if ircmsg.find("PING :") != -1:
             ping()
+
+        if time.time() - start_time > 21600:
+            sock.send(bytes("PART ##idk\n", "UTF-8"))
+            sock.send(bytes("PART #r.trees\n", "UTF-8"))
+            print('restart')
+            join(channel)
+            join(channel2)
+            start_time = time.time()
+            
+            
+           
+            
+            
+            
 if __name__ == '__main__':
     main()
