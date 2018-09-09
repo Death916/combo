@@ -43,7 +43,7 @@ def main():
     connect()
     join(channel)
     join(channel2)
-    auth()
+    #auth()
     start_time = time.time()
     while 1:
         ircmsg = sock.recv(3300).decode("UTF-8")
