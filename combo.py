@@ -8,7 +8,7 @@ channel = "#r.trees"
 nick = "combo"
 admin = "Death916"
 logout = "bye " + nick
-password = input('input password\n')
+#password = input('input password\n')
 combo = 0
 last_nick = ""
 exit_code = "!cquit"
@@ -19,7 +19,7 @@ def connect():
     sock.send(bytes("USER " + nick +" "+ nick + " " + nick + " " + nick + "\n", "UTF-8"))
     sock.send(bytes("NICK " + nick + "\n", "UTF-8" + "\n"))
 
-def auth():
+#def auth():
     sock.send(bytes("PRIVMSG" + " NICKSERV :identify " + password +"\n"," UTF-8"))
 
 def join(chan):
