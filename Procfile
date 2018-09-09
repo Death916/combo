@@ -1,1 +1,1 @@
-web: python combo.py
+worker: python combo.py
