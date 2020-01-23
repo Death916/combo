@@ -36,7 +36,7 @@ def ping():
 def send(msg, target):
     sock.send(bytes("PRIVMSG " + target + "  :" + msg + "\n", "UTF-8"))
 
-#def combo():
+
     
 
 def main():
@@ -81,6 +81,7 @@ def main():
             print('restart')
             join(channel)
             join(channel2)
+            send("restart", channel2)
             start_time = time.time()
             
             
