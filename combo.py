@@ -63,9 +63,9 @@ def main():
                         combo += 1
                        
                 if message.rstrip() == "!combo":   
-                    if combo < 5:
+                    if combo > 2:
                         send(last_nick + " is on a " + str(combo) + " message streak", channel)
-                    elif combo >= 6:
+                    elif combo >= 10:
                         send(last_nick + " is on a " + str(combo) + " message streak. they're talkin to themselves", channel)
                         
             if name.lower() == admin.lower() and message.rstrip() == exit_code:
